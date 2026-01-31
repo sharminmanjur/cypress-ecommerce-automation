@@ -1,0 +1,21 @@
+
+public-encrypt/test
+*.pem
+*.pub
+*.priv
+
+# Dependencies
+node_modules/
+
+# Generated directories
+cypress/downloads/
+cypress/screenshots/
+allure-results/
+jsonlogs/
+runner-results/
+.vscode/
+
+# Output files
+*.png
+cucumber-report.html
+test-report.html

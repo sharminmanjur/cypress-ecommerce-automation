@@ -1,0 +1,71 @@
+name: Cypress Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Verify Cypress installation
+        run: npm run cy:verify
+
+      - name: Run Cypress tests
+        run: npm run cy:run
+        continue-on-error: true
+        env:
+          CYPRESS_USER_NAME: ${{ secrets.USER_NAME }}
+          CYPRESS_USER_EMAIL: ${{ secrets.USER_EMAIL }}
+          CYPRESS_USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+          CYPRESS_FIRST_NAME: ${{ secrets.FIRST_NAME }}
+          CYPRESS_LAST_NAME: ${{ secrets.LAST_NAME }}
+          CYPRESS_ADDRESS1: ${{ secrets.ADDRESS1 }}
+          CYPRESS_ADDRESS2: ${{ secrets.ADDRESS2 }}
+          CYPRESS_COUNTRY: ${{ secrets.COUNTRY }}
+          CYPRESS_ZIPCODE: ${{ secrets.ZIPCODE }}
+          CYPRESS_STATE: ${{ secrets.STATE }}
+          CYPRESS_CITY: ${{ secrets.CITY }}
+          CYPRESS_MOBILE_NUMBER: ${{ secrets.MOBILE_NUMBER }}
+          CYPRESS_CARD_NUMBER: ${{ secrets.CARD_NUMBER }}
+          CYPRESS_CARD_CVC: ${{ secrets.CARD_CVC }}
+          CYPRESS_CARD_EXP_MONTH: ${{ secrets.CARD_EXP_MONTH }}
+          CYPRESS_CARD_EXP_YEAR: ${{ secrets.CARD_EXP_YEAR }}
+          CYPRESS_BASE_URL: ${{ secrets.BASE_URL }}
+          CYPRESS_API_BASE_URL: ${{ secrets.API_BASE_URL }}
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-test-results
+          path: |
+            cypress/videos/
+            cypress/screenshots/
+            jsonlogs/
+            runner-results/
+
+      - name: Upload Cucumber Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-report
+          path: cucumber-report.html

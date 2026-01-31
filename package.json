@@ -1,0 +1,44 @@
+{
+  "name": "automation-exercise",
+  "version": "1.0.0",
+  "description": "![CI/CD](https://github.com/sharminmanjur/Automation-Exercise/actions/workflows/builspec.yml/badge.svg)",
+  "main": "index.js",
+  "scripts": {
+    "cy:version": "cypress version",
+    "cy:info": "cypress info",
+    "cy:verify": "cypress verify",
+    "cy:run": "cypress run",
+    "cy:run:chrome": "cypress run --browser chrome",
+    "cy:run:chrome:headed": "cypress run --browser chrome --headed",
+    "cy:run:firefox": "cypress run --browser firefox",
+    "cy:run:firefox:headed": "cypress run --browser firefox --headed",
+    "cy:run:allure": "cypress run --env allure=true",
+    "cy:parallel": "cypress-parallel -s cy:run -t 2 -d cypress/e2e/features --browserName chrome",
+    "cy:parallel:chrome": "cypress-parallel -s cy:run:chrome -t 2 -d cypress/e2e/features --browserName chrome",
+    "cy:parallel:firefox": "cypress-parallel -s cy:run:firefox -t 2 -d cypress/e2e/features --browserName firefox",
+    "cy:open": "cypress open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^23.2.1",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.6",
+    "@shelex/cypress-allure-plugin": "^2.41.2",
+    "allure-commandline": "^2.34.1",
+    "cypress": "^14.5.4",
+    "cypress-commands": "^3.0.0",
+    "cypress-cucumber-preprocessor": "^4.3.1",
+    "cypress-real-events": "^1.15.0",
+    "cypress-wait-until": "^3.0.2",
+    "cypress-xpath": "^2.0.1",
+    "esbuild": "^0.25.11"
+  },
+  "dependencies": {
+    "cypress-parallel": "^0.15.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Automation-Exercise"
+  }
+}
